@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [Range(1, 10)]
     int speed;
     [SerializeField]
-    [Range(1, 10)]
+    [Range(1, 30)]
     int jumpPower;
     bool isGround;
     [SerializeField]
@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+      
         isGround = true;
         jumpCount = 1;
     }
@@ -39,13 +40,14 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space)&&jumpCount>0)
+        if(Input.GetKeyDown(KeyCode.Space) && jumpCount>0)
         {
 
 
-            
-            rb.AddForce(Vector3.up*jumpPower, ForceMode.Impulse); 
-            isGround = false; 
+
+            //rb.AddForce(Vector3.up*jumpPower, ForceMode.Impulse); 
+            rb.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
+
             jumpCount--; 
            
 
