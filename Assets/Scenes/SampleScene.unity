@@ -811,8 +811,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  jumpPower: 30
-  jumpCount: 0
 --- !u!54 &1330389683
 Rigidbody:
   m_ObjectHideFlags: 0
