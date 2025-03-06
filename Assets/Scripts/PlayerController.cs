@@ -6,64 +6,76 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     [Range(1, 10)]
     int speed;
-    [SerializeField]
-    [Range(1, 30)]
-    int jumpPower;
-    bool isGround;
-    [SerializeField]
-    int jumpCount;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //[SerializeField]
+    //[Range(1, 30)]
+    //int jumpPower;
+   
+    //[SerializeField]
+    //int jumpCount;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        
+        
       
-        isGround = true;
-        jumpCount = 1;
+        
+        //jumpCount = 1;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         Move();
-        Jump();
+       // Jump();
 
     }
     private void Move()
     {
+        //수평축과 수직축의 입력값을 저장
         float xinput = Input.GetAxis("Horizontal");
         float zinput = Input.GetAxis("Vertical");
+        //실제 이동 속도를 입력값과 이동 속력을 사용해 결정
         float xspeed = xinput * speed;
         float zspeed = zinput * speed;
-
+        //vector3속도를 생성
         Vector3 a = new Vector3(xspeed, 0, zspeed);
+        //리지드바디의 속도에 할당
         rb.linearVelocity = a;
     }
-    private void Jump()
+
+    public void Die()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && jumpCount>0)
-        {
+
+        gameObject.SetActive(false);
+
+    }
+    //private void Jump()
+    //{
+    //    if(Input.GetKeyDown(KeyCode.Space) && jumpCount>0)
+    //    {
 
 
 
-            //rb.AddForce(Vector3.up*jumpPower, ForceMode.Impulse); 
-            rb.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
-
-            jumpCount--; 
+    //        rb.AddForce(Vector3.up*jumpPower, ForceMode.Impulse); 
            
 
-        }
+    //        jumpCount--; 
+           
 
-    }
+    //    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGround=true;
-            jumpCount = 1;
+    //}
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+           
+    //        jumpCount = 1;
 
 
-        }
-    }
+    //    }
+    //}
   
 }
