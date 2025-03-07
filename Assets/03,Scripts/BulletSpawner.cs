@@ -4,15 +4,15 @@ public class BulletSpawner : MonoBehaviour
 {
     // 총알이 조준할 대상의 Transform 컴포넌트.
     public Transform target;
-
+    
     // 총알이 생성되는 최소 시간 간격.
     [SerializeField]
-    [Range(1, 5)]
+    [Range(0.5f, 5)]
     float minTime;
 
     // 총알이 생성되는 최대 시간 간격.
     [SerializeField]
-    [Range(1, 5)]
+    [Range(1, 3)]
     float maxTime;
 
     // 총알이 생성되는 시간 간격.
@@ -27,11 +27,15 @@ public class BulletSpawner : MonoBehaviour
     // Start는 첫 프레임 업데이트 전에 호출됩니다.
     void Start()
     {
+        //target = FindAnyObjectByType<PlayerController>().transform;
+        //Collider[] a = FindObjectsByType<Collider>(FindObjectsSortMode.None);
+
         // passTime을 0으로 초기화합니다.
         passTime = 0;
 
         // 초기 spawnRate를 minTime과 maxTime 사이의 랜덤 값으로 설정합니다.
         spawnRate = Random.Range(minTime, maxTime);
+        
     }
 
     // Update는 매 프레임마다 호출됩니다.
@@ -48,7 +52,7 @@ public class BulletSpawner : MonoBehaviour
         passTime += Time.deltaTime;
 
         // passTime이 spawnRate를 초과했는지 확인합니다.
-        if (passTime > spawnRate)
+        if (passTime >= spawnRate)
         {
             // passTime을 0으로 리셋합니다.
             passTime = 0;
@@ -56,8 +60,7 @@ public class BulletSpawner : MonoBehaviour
             // 현재 위치와 회전에 총알을 생성합니다.
             GameObject bullets = Instantiate(bullet, transform.position, transform.rotation);
 
-            // 디버그 메시지를 콘솔에 출력합니다.
-            Debug.Log("격발");
+            
 
             // 총알이 타겟을 바라보게 합니다.
             bullets.transform.LookAt(target);
