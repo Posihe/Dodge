@@ -25,10 +25,33 @@ public class GameManager : MonoBehaviour
             surviveTime += Time.deltaTime;
             timeText.text = "Time:" + (int)surviveTime;
         }
+        else
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(0);
+
+            }
+
+
+        }
     }
 
     public void EndGame()
     {
-       
+        isGameover = true;
+        gameOverText.SetActive(true);
+
+        float bestTime = PlayerPrefs.GetFloat("BestTime");
+
+        if(surviveTime>bestTime)
+        {
+
+            bestTime = surviveTime;
+
+            PlayerPrefs.SetFloat("BestTime", bestTime);
+
+        }
+        recordText.text = "Best Time" + (int)bestTime;
     }
 }

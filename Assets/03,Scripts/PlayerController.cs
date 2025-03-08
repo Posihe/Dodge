@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
     {
 
         gameObject.SetActive(false);
+        GameManager gameManager = FindAnyObjectByType<GameManager>();
+        gameManager.EndGame();
 
     }
     //private void Jump()
