@@ -22,7 +22,7 @@ public class BulletSpawner : MonoBehaviour
     float passTime;
 
     // 생성할 총알의 프리팹.
-    public GameObject bullet;
+    public GameObject bulletPrefab;
 
     // Start는 첫 프레임 업데이트 전에 호출됩니다.
     void Start()
@@ -57,13 +57,15 @@ public class BulletSpawner : MonoBehaviour
             // passTime을 0으로 리셋합니다.
             passTime = 0;
 
-            // 현재 위치와 회전에 총알을 생성합니다.
-            GameObject bullets = Instantiate(bullet, transform.position, transform.rotation);
+         
+                GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                bullet.transform.LookAt(target);
 
             
 
-            // 총알이 타겟을 바라보게 합니다.
-            bullets.transform.LookAt(target);
+            
+
+           
 
             // 새로운 랜덤 spawnRate를 minTime과 maxTime 사이에서 설정합니다.
             spawnRate = Random.Range(minTime, maxTime);
